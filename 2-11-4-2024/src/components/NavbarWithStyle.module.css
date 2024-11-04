@@ -1,0 +1,31 @@
+/* NavbarWithStyle.module.css */
+.navbar {
+  background-color: #333;
+  padding: 10px;
+  color: white;
+  font-family: Arial, sans-serif;
+  text-align: center;
+}
+
+.title {
+  font-size: 24px;
+  margin: 0;
+}
+
+.navList {
+  list-style-type: none;
+  padding: 0;
+  margin: 10px 0 0 0;
+  display: flex;
+  justify-content: center;
+}
+
+.navItem {
+  margin: 0 15px;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.navItem:hover {
+  color: #ddd;
+}
