@@ -1,0 +1,128 @@
+/* NavbarWithStyle.module.css */
+
+:root {
+  --primary-color: #4a90e2;
+  --secondary-color: #ffffff;
+  --hover-color: #357abd;
+  --text-color: #333;
+  --bg-color: #f8f9fa;
+  --font-family: "Arial", sans-serif;
+}
+
+.navbar {
+  background-color: var(--primary-color);
+  padding: 1rem;
+  text-align: center;
+  border-bottom: 2px solid var(--hover-color);
+}
+
+.title {
+  color: var(--secondary-color);
+  font-size: 1.8rem;
+  font-family: var(--font-family);
+  margin: 0;
+}
+
+.navList {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  padding: 0.5rem 0;
+  list-style-type: none;
+  margin: 0;
+}
+
+.navItem {
+  color: var(--primary-color);
+  font-weight: bold;
+  cursor: pointer;
+  position: relative;
+  font-size: 1rem;
+}
+
+.navItem:hover {
+  color: var(--hover-color);
+}
+
+.navItem::after {
+  content: "";
+  display: block;
+  width: 0;
+  height: 2px;
+  background: var(--hover-color);
+  transition: width 0.3s;
+}
+
+.navItem:hover::after {
+  width: 100%;
+}
+
+h1 {
+  font-family: var(--font-family);
+  color: var(--text-color);
+  text-align: center;
+  margin-top: 2rem;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .navbar {
+    padding: 0.8rem;
+  }
+  .title {
+    font-size: 1.5rem;
+  }
+  .navList {
+    flex-direction: column;
+    gap: 1rem;
+  }
+}
+
+/* Modal Overlay - background behind the modal */
+.overlay {
+  /* position: fixed; */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  /* background-color: rgba(0, 0, 0, 0.7); */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* Modal Content */
+.modal {
+  background-color: white;
+  border-radius: 8px;
+  padding: 20px;
+  position: relative;
+  max-width: 500px;
+  width: 90%;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease-in-out;
+}
+
+/* Close Button */
+.closeButton {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: #333;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.closeButton:hover {
+  color: #e74c3c;
+}
+
+/* Content inside the modal */
+.content {
+  font-size: 16px;
+  color: #333;
+}
