@@ -3,7 +3,7 @@ const router = express.Router();
 const CarController = require("../controllers/carController");
 const { auth, checkRole } = require("../middlewares/auth");
 
-router.get("/", CarController.getAllCars);
+router.get("/", auth, CarController.getAllCars);
 router.get("/:id", CarController.getCarById);
 
 router.post(

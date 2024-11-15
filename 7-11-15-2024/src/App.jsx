@@ -5,31 +5,13 @@ import Navbar from "./components/navbar/Navbar";
 import Homepage from "./pages/Homepage";
 import Login from "./pages/Login";
 import { isTokenExpired } from "../utils/auth";
+import { useAuth } from "./context/AuthContext";
 
 function App() {
-  const navigate = useNavigate();
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-
-  // check usernya login ga
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-
-    if (!token || isTokenExpired(token)) {
-      localStorage.removeItem("token");
-      localStorage.removeItem("username");
-      navigate("/login");
-    }
-    setIsAuthenticated(!!token);
-  }, []);
-
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("username");
-    setIsAuthenticated(false);
-  };
+  const { isAuthenticated, logout } = useAuth();
   return (
     <>
-      {isAuthenticated && <Navbar onLogout={handleLogout} />}
+      {isAuthenticated && <Navbar onLogout={logout} />}
 
       <Routes>
         <Route

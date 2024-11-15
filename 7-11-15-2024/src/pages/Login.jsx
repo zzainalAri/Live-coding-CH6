@@ -2,6 +2,8 @@ import { useState } from "react";
 import axios from "axios";
 import Notification from "../components/notification/Notification";
 import { useNavigate } from "react-router-dom";
+import axiosInstance from "../api/axiosInstance";
+import { useAuth } from "../context/AuthContext";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -11,40 +13,26 @@ function Login() {
 
   const navigate = useNavigate();
 
+  const { login } = useAuth();
+
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(
-        "http://localhost:3000/api/v1/users/login",
-        { email, password }
-      );
-      console.log(response);
+      const response = await login(email, password);
 
-      if (response.data.isSuccess) {
-        const token = response.data.data.token;
-        const username = response.data.data.username;
-
-        localStorage.setItem("token", token);
-        localStorage.setItem("username", username);
-
-        setNotification({
-          type: "error",
-          message: response.data.message || "Successfully login",
-          description: "You are now redirect to Homepage",
-        });
-
-        setTimeout(() => {
-          navigate("/");
-          navigate(0);
-        }, 2000);
-      } else {
-        console.log("hayuu");
-      }
-    } catch (err) {
-      console.log(err.response.data.message);
       setNotification({
         type: "error",
-        message: err.response.data.message || "An error occured",
+        message: response.data.message || "Successfully login",
+        description: "You are now redirect to Homepage",
+      });
+
+      setTimeout(() => {
+        setNotification(null);
+      }, 2000);
+    } catch (err) {
+      setNotification({
+        type: "error",
+        message: err?.message || "An error occured",
         description: "Please try again",
       });
     }
